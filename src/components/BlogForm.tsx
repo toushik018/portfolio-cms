@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { createBlog } from "../services/api";
 import RichTextEditor from "./RichTextEditor";
+import { toast } from "sonner";
+import { createBlog } from "@/services/api";
 
 const BlogForm = ({ onSave }: { onSave: () => void }) => {
   const [title, setTitle] = useState("");
@@ -19,7 +20,8 @@ const BlogForm = ({ onSave }: { onSave: () => void }) => {
 
     try {
       await createBlog(newBlog);
-      onSave(); // Call the onSave function passed from the parent component
+      onSave();
+      toast.success("Project added successfully!"); // Call the onSave function passed from the parent component
     } catch (error) {
       console.error("Failed to save the blog:", error);
     }
